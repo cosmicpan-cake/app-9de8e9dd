@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Portf&ouml;y</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone" id="phone">
+
+  <!-- Small nav bar added above the pixel-exact content (source image had no
+       usable back/info icons to repurpose — just a plain 17px black strip). -->
+  <div class="nav-bar">
+    <button class="icon-btn" id="btnHome" aria-label="Ana Sayfa">
+      <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="icon-btn" id="btnEdit" aria-label="D&uuml;zenle">
+      <svg viewBox="0 0 24 24"><path d="M4 20 L4.6 16.7 L16 5.3 C16.6 4.7 17.6 4.7 18.2 5.3 L18.7 5.8 C19.3 6.4 19.3 7.4 18.7 8 L7.3 19.4 Z M14.5 6.8 L17.2 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="content">
+    <img src="background.png" alt="" class="bg">
+
+    <!-- DYNAMIC OVERLAYS -->
+    <div class="val" id="enstrumanValue" style="top:264px;">IEYHO</div>
+    <div class="val" id="maliyetValue" style="top:382px;">168,000000</div>
+    <div class="val" id="adetValue" style="top:501px;">23.000,00</div>
+    <div class="val" id="piyasaValue" style="top:619px;">4.128.500,00 &#8378;</div>
+    <div class="val" id="fiyatValue" style="top:739px;">179,50</div>
+    <div class="val kz" id="karZararValue" style="top:858px;">+264.500,00 &#8378;</div>
+  </div>
+
+  <!-- EDIT SCREEN (functional overlay) -->
+  <div class="edit-overlay hidden" id="screen-edit">
+    <div class="edit-header">
+      <button class="icon-btn" id="btnCancelEdit" aria-label="Geri">
+        <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2>De&#287;erleri D&uuml;zenle</h2>
+      <span class="icon-btn" style="visibility:hidden"></span>
+    </div>
+    <div class="edit-scroll">
+      <div class="edit-group">
+        <div class="field-row">
+          <span class="field-label">Enstr&uuml;man</span>
+          <input class="field-input" type="text" maxlength="5" id="inEnstruman">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Maliyet</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inMaliyet">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Adet</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inAdet">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Son Fiyat</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inFiyat">
+        </div>
+      </div>
+    </div>
+    <div class="save-bar">
+      <button class="btn-save" id="btnSave">Kaydet</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Hisse Senedi Portföyüm</title>
+
+<!-- iOS: Add to Home Screen -> opens without Safari's address bar / browser chrome -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Portföyüm">
+
+<!-- Android/Chrome: Add to Home Screen / Install app -> standalone display -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone" id="phone">
+
+  <!-- STATUS BAR (measured from org.jpeg: time at original x35-148 y45-88) -->
+  <div class="statustime" id="clockPill">19:01</div>
+  <div class="dynamic-island"></div>
+  <svg class="icon-signal" viewBox="0 0 52 43">
+    <rect x="0" y="24" width="9" height="17" rx="1.6" fill="#14161f"/>
+    <rect x="14" y="16" width="9" height="25" rx="1.6" fill="#14161f"/>
+    <rect x="28" y="8" width="9" height="33" rx="1.6" fill="#14161f"/>
+    <rect x="42" y="0" width="9" height="41" rx="1.6" fill="#b9bac0"/>
+  </svg>
+  <svg class="icon-battery" viewBox="0 0 86 48">
+    <rect x="2" y="6" width="72" height="36" rx="10" fill="none" stroke="#8b8a90" stroke-width="3"/>
+    <rect x="8" y="12" width="20" height="24" rx="4.5" fill="#fecd06"/>
+    <rect x="76.5" y="17" width="6" height="14" rx="2.5" fill="#8b8a90"/>
+    <path d="M46 10 L27 27 L38 27 L30 41 L54 22 L42 22 Z" fill="#14161f"/>
+  </svg>
+
+  <!-- HEADER: left arrow = back to frontpage, right info icon = edit trigger -->
+  <button class="icon-btn back-arrow" id="btnHome" aria-label="Ana Sayfa">
+    <img src="header_back.png" alt="" class="header-icon-img">
+  </button>
+  <img src="header_title.png" alt="Hisse Senedi Portföyüm" class="title">
+  <button class="icon-btn edit-icon" id="btnEdit" aria-label="Düzenle">
+    <img src="header_info.png" alt="" class="header-icon-img">
+  </button>
+  <div class="subtitle">Güncel Portföy Dağılımım</div>
+
+  <!-- CARD GROUP (box x35-907 y321-, per-card content injected by app.js) -->
+  <div class="card-group" id="cardGroup"></div>
+
+  <!-- BOTTOM NAV (measured: bar top ~1858, icons y1881-1923, labels y1950-1970) -->
+  <img src="bottomnav_full.png" alt="" class="bottomnav">
+
+  <!-- Invisible fullscreen trigger, overlaid exactly on "Ana Sayfa" (leftmost
+       nav item). No visible UI change — tapping that icon/label toggles
+       fullscreen instead of a separate floating button. See app.js. -->
+  <button id="fsToggle" class="fs-invisible-trigger" aria-label="Tam Ekran"></button>
+
+  <!-- EDIT SCREEN (functional overlay, not part of pixel-matched screenshot) -->
+  <div class="edit-overlay hidden" id="screen-edit">
+    <div class="edit-header">
+      <button class="icon-btn" id="btnCancelEdit" aria-label="Geri">
+        <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2>Değerleri Düzenle</h2>
+      <span class="icon-btn" style="visibility:hidden"></span>
+    </div>
+    <div class="edit-scroll" id="editForm"></div>
+    <div class="save-bar">
+      <button class="btn-save" id="btnSave">Kaydet</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

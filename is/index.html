@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Hisse Senedi Portf&ouml;y&uuml;m</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <img src="background.png" alt="" class="bg">
+
+  <!-- DYNAMIC OVERLAYS (everything else is baked into background.png) -->
+  <div class="val toplam-tutar" id="toplamTutarValue">10.656.539,40 TL</div>
+  <div class="val toplam-karzarar" id="toplamKarZararValue">+656.381,05 TL</div>
+
+  <div class="val row-tutar" id="tutarValue">10.656.539,40 TL</div>
+  <div class="val row-adet" id="adetValue">59.401,000</div>
+  <div class="val row-fiyat" id="fiyatValue">179,40 TL</div>
+  <div class="val row-maliyet" id="maliyetValue">168,35 TL</div>
+
+  <button class="icon-btn home-trigger" id="btnHome" aria-label="Ana Sayfa"></button>
+  <button class="icon-btn edit-trigger" id="btnEdit" aria-label="D&uuml;zenle"></button>
+
+  <!-- EDIT SCREEN (functional overlay) -->
+  <div class="edit-overlay hidden" id="screen-edit">
+    <div class="edit-header">
+      <button class="icon-btn" id="btnCancelEdit" aria-label="Geri">
+        <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2>De&#287;erleri D&uuml;zenle</h2>
+      <span class="icon-btn" style="visibility:hidden"></span>
+    </div>
+    <div class="edit-scroll">
+      <div class="edit-group">
+        <div class="field-row">
+          <span class="field-label">Sat&#305;labilir Adet</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inAdet">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Son Fiyat (TL)</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inFiyat">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Maliyet (TL)</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inMaliyet">
+        </div>
+      </div>
+    </div>
+    <div class="save-bar">
+      <button class="btn-save" id="btnSave">Kaydet</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

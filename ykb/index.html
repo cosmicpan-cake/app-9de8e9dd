@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>IEYHO</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <img src="background.png" alt="" class="bg">
+
+  <!-- DYNAMIC OVERLAYS (everything else is baked into background.png) -->
+  <div class="price-row">
+    <div class="price-value" id="priceValue">179,3 TL</div>
+    <div class="change-wrap" id="changeWrap">
+      <svg id="changeArrow" class="change-arrow" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M5 19 L19 5 M19 5 H9 M19 5 V15" fill="none" stroke="#29a542" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="change-pct" id="changePct">%0,56</span>
+    </div>
+  </div>
+
+  <div class="guncel-deger-value" id="guncelDegerValue">11.833.800,00 TL</div>
+
+  <div class="gain-line" id="gainLine">+745.800,00 TL &middot; %6,72</div>
+
+  <div class="row-value" id="row1Value" style="top:610px;">66.000</div>
+  <div class="row-value" id="row2Value" style="top:715px;">66.000</div>
+  <div class="row-value" id="row3Value" style="top:821px; right:74px;">168,000000 TL</div>
+
+  <!-- Invisible overlays on the static background image: left arrow = edit trigger, right info icon = back to frontpage -->
+  <button class="icon-btn edit-trigger" id="btnEdit" aria-label="D&uuml;zenle"></button>
+  <button class="icon-btn home-trigger" id="btnHome" aria-label="Ana Sayfa"></button>
+
+  <!-- EDIT SCREEN (functional overlay) -->
+  <div class="edit-overlay hidden" id="screen-edit">
+    <div class="edit-header">
+      <button class="icon-btn" id="btnCancelEdit" aria-label="Geri">
+        <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2>De&#287;erleri D&uuml;zenle</h2>
+      <span class="icon-btn" style="visibility:hidden"></span>
+    </div>
+    <div class="edit-scroll">
+      <div class="edit-group">
+        <div class="field-row">
+          <span class="field-label">Fiyat (TL)</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inFiyat">
+        </div>
+        <div class="field-row">
+          <span class="field-label">De&#287;i&#351;im (%)</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inDegisim">
+        </div>
+        <div class="field-row">
+          <span class="field-label">G&uuml;ncel Adet</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inAdet">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Ortalama Maliyet (TL)</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inMaliyet">
+        </div>
+      </div>
+    </div>
+    <div class="save-bar">
+      <button class="btn-save" id="btnSave">Kaydet</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
