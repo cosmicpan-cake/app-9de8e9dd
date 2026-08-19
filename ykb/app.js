@@ -15,14 +15,26 @@
       var raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         var parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === "object") return parsed;
+        if (parsed && typeof parsed === "object") return applyGlobalPrice(parsed);
       }
     } catch (e) {}
-    return JSON.parse(JSON.stringify(DEFAULT_STOCK));
+    return applyGlobalPrice(JSON.parse(JSON.stringify(DEFAULT_STOCK)));
   }
 
   function saveStock(s) {
+    // Stamped so a later launcher setting can be told apart from this edit.
+    s.ts = window.GLOBAL_PRICE ? window.GLOBAL_PRICE.stamp() : Date.now();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  }
+
+  /* A price set on the launcher applies here too, unless this screen was
+     edited more recently than that setting was written. */
+  function applyGlobalPrice(s) {
+    if (window.GLOBAL_PRICE) {
+      var g = window.GLOBAL_PRICE.priceFor(s.ts);
+      if (g !== null) s.fiyat = g;
+    }
+    return s;
   }
 
   var stock = loadStock();

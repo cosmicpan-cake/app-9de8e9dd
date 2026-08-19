@@ -29,10 +29,12 @@
 
   function load() {
     var base = defaults();
+    var savedTs = 0;
     try {
       var raw = localStorage.getItem(KEY);
       if (raw) {
         var saved = JSON.parse(raw);
+        savedTs = (saved && saved.ts) || 0;
         // Merge rather than replace: a field added later must not be masked by
         // stale cached data from an earlier version of the page.
         if (saved && typeof saved === "object") {
@@ -42,6 +44,18 @@
         }
       }
     } catch (e) {}
+    // A price set on the launcher applies to every screen, unless this screen
+    // was edited more recently than the launcher setting was written.
+    if (window.GLOBAL_PRICE && "fiyat" in base) {
+      var g = window.GLOBAL_PRICE.priceFor(savedTs);
+      if (g !== null) {
+        base.fiyat = g;
+        if (C.derive) {
+          var d = C.derive(base);
+          Object.keys(d).forEach(function (k) { base[k] = d[k]; });
+        }
+      }
+    }
     if (C.battery != null) base.battery = randomBattery(C.battery);
     return base;
   }
@@ -188,6 +202,8 @@
       readForm();
       var keep = state.battery;            // randomised per visit, not saved
       delete state.battery;
+      // Stamped so a later launcher setting can be told apart from this edit.
+      state.ts = window.GLOBAL_PRICE ? window.GLOBAL_PRICE.stamp() : Date.now();
       localStorage.setItem(KEY, JSON.stringify(state));
       if (keep != null) state.battery = keep;
       render();

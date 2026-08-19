@@ -10,8 +10,15 @@
 
 <div class="phone" id="phone">
   <div class="header">
-    <div class="header-title">Portföy Uygulamaları</div>
-    <div class="header-subtitle">30 ekran &middot; bir tanesini seçin</div>
+    <div class="header-text">
+      <div class="header-title">Portföy Uygulamaları</div>
+      <div class="header-subtitle">30 ekran &middot; bir tanesini seçin</div>
+    </div>
+    <button class="gear" id="btnSettings" aria-label="Ayarlar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M19.14 12.94a7.07 7.07 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.3 7.3 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.59.24-1.13.56-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.65 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.07 7.07 0 0 0 0 1.88l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.38 1.04.7 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.59-.24 1.13-.56 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 15.6 12 3.6 3.6 0 0 1 12 15.6z"/>
+      </svg>
+    </button>
   </div>
 
   <div class="pages" id="pages">
@@ -115,6 +122,29 @@
     </div>
   </div>
 
+  <div class="settings hidden" id="settings">
+    <div class="settings-head">
+      <button id="btnBack" aria-label="Geri">
+        <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2>Ayarlar</h2>
+      <span style="width:2.2em"></span>
+    </div>
+    <div class="settings-body">
+      <div class="settings-card">
+        <div class="field-row">
+          <span class="field-label">IEYHO Son Fiyat</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inPrice" placeholder="örn. 179,60">
+        </div>
+        <p class="field-note" id="priceNote"></p>
+      </div>
+    </div>
+    <div class="settings-bar">
+      <button class="btn-clear" id="btnClear">Temizle</button>
+      <button class="btn-save" id="btnSavePrice">Kaydet</button>
+    </div>
+  </div>
+
   <div class="pager" id="pager">
     <button class="pager-btn" id="prev" aria-label="Önceki">&#8249;</button>
     <div class="dots" id="dots"></div>
@@ -122,6 +152,7 @@
   </div>
 </div>
 
+<script src="global-price.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -72,5 +72,51 @@
     if (moved) { e.preventDefault(); moved = false; }
   }, true);
 
+
+  // ---------------- settings ----------------
+  // One IEYHO price shared by every screen. Saving it here makes each screen
+  // open with that price; editing a screen afterwards overrides it for that
+  // screen only, until the price is saved here again.
+  var panel = document.getElementById("settings");
+  var input = document.getElementById("inPrice");
+  var note = document.getElementById("priceNote");
+
+  function toLocal(v) { return String(v).replace(".", ","); }
+  function fromLocal(s) {
+    var v = parseFloat(String(s).replace(/\./g, "").replace(",", "."));
+    return isNaN(v) ? null : v;
+  }
+
+  function refreshNote() {
+    var g = window.GLOBAL_PRICE.read();
+    note.textContent = g
+      ? "Bu fiyat tüm ekranlarda kullanılıyor. Bir ekranı kendi düzenleme "
+        + "sayfasından değiştirirseniz o ekran kendi değerini kullanır."
+      : "Boş bırakılırsa her ekran kendi fiyatını kullanır.";
+  }
+
+  function showSettings(on) {
+    panel.classList.toggle("hidden", !on);
+    if (on) {
+      var g = window.GLOBAL_PRICE.read();
+      input.value = g ? toLocal(g.fiyat) : "";
+      refreshNote();
+    }
+  }
+
+  document.getElementById("btnSettings").addEventListener("click", function () { showSettings(true); });
+  document.getElementById("btnBack").addEventListener("click", function () { showSettings(false); });
+  document.getElementById("btnSavePrice").addEventListener("click", function () {
+    var v = fromLocal(input.value);
+    if (v === null || v <= 0) { window.GLOBAL_PRICE.clear(); }
+    else { window.GLOBAL_PRICE.write(v); }
+    showSettings(false);
+  });
+  document.getElementById("btnClear").addEventListener("click", function () {
+    window.GLOBAL_PRICE.clear();
+    input.value = "";
+    refreshNote();
+  });
+
   go(0);
 })();

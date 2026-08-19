@@ -40,7 +40,7 @@
       fiyat: 3.270,
       degisim: -2.39,
       ortMaliyet: 3.68,
-      visible: true
+      visible: false
     },
     {
       id: "KUYAS",
@@ -51,22 +51,40 @@
       fiyat: 66.900,
       degisim: -4.43,
       ortMaliyet: 68.00,
-      visible: true
+      visible: false
     }
   ];
+
+  /* A price set on the launcher applies to the IEYHO row, unless this screen
+     was edited more recently than that setting was written. The other two
+     holdings are unaffected. */
+  function applyGlobalPrice(stocks) {
+    if (!window.GLOBAL_PRICE) return stocks;
+    stocks.forEach(function (s) {
+      if (s.id !== "IEYHO") return;
+      var g = window.GLOBAL_PRICE.priceFor(s.ts);
+      if (g !== null) s.fiyat = g;
+    });
+    return stocks;
+  }
 
   function loadStocks() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         var parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length === DEFAULT_STOCKS.length) return parsed;
+        if (Array.isArray(parsed) && parsed.length === DEFAULT_STOCKS.length) {
+          return applyGlobalPrice(parsed);
+        }
       }
     } catch (e) {}
-    return JSON.parse(JSON.stringify(DEFAULT_STOCKS));
+    return applyGlobalPrice(JSON.parse(JSON.stringify(DEFAULT_STOCKS)));
   }
 
   function saveStocks(stocks) {
+    // Stamped so a later launcher setting can be told apart from this edit.
+    var now = window.GLOBAL_PRICE ? window.GLOBAL_PRICE.stamp() : Date.now();
+    stocks.forEach(function (s) { if (s.id === "IEYHO") s.ts = now; });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stocks));
   }
 
