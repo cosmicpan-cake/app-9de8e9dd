@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-  // Scale the fixed 945x1200 design canvas to fill whatever the real screen is.
-  var DESIGN_W = 945, DESIGN_H = 1200;
+  // Scale the fixed 945x1500 design canvas to fill whatever the real screen is.
+  var DESIGN_W = 945, DESIGN_H = 1500;
   function fitPhoneToViewport() {
     var vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
     var vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
