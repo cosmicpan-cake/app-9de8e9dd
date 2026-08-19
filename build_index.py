@@ -35,6 +35,10 @@ SCREENS = [
     ("sembol-tablo", u"Sembol Tablosu"),
     ("turuncu-varlik", u"Varlıklarım"),
     ("cepteteb", u"Portföyüm (CEPTETEB)"),
+    ("portfoy-tablo", u"Portföy Tablosu"),
+    ("emir-girisi", u"Emir Girişi"),
+    ("vakif-yatirim", u"Vakıf Yatırım"),
+    ("toplu-emir", u"Toplu Emir"),
 ]
 
 HEAD = u"""<!DOCTYPE html>
