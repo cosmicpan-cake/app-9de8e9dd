@@ -4,8 +4,8 @@
   // Scale the fixed 945x1500 design canvas to fill whatever the real screen is.
   var DESIGN_W = 945, DESIGN_H = 1500;
   function fitPhoneToViewport() {
-    var vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
-    var vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var vw = window.VIEWPORT.width();
+    var vh = window.VIEWPORT.height();
     var scale = Math.min(vw / DESIGN_W, vh / DESIGN_H);
     document.getElementById("phone").style.transform = "scale(" + scale + ")";
     return scale;

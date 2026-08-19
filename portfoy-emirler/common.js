@@ -141,8 +141,8 @@
   // ---------- scale the fixed canvas to the viewport ----------
   var W = C.canvas[0], H = C.canvas[1];
   function fit() {
-    var vw = (window.visualViewport ? window.visualViewport.width : window.innerWidth);
-    var vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    var vw = window.VIEWPORT.width();
+    var vh = window.VIEWPORT.height();
     document.getElementById("phone").style.transform =
       "scale(" + Math.min(vw / W, vh / H) + ")";
   }

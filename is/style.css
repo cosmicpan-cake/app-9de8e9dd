@@ -121,3 +121,12 @@ body {
   background: #1a73e8; color: #fff; font-weight: 700; font-size: 28px; font-family: inherit;
 }
 .btn-save:active { background: #135cb8; }
+
+/* While a field is focused the canvas keeps its full-height scale, so it no
+   longer fits above the keyboard — anchor it to the top rather than centring
+   it, which would push the fields being typed into off screen. */
+body.editing { align-items: flex-start; }
+/* The canvas keeps its full unscaled layout size, so a top-aligned flex item
+   would still paint from the middle of that box. The origin has to move with
+   the alignment for the top of the screen to land at the top of the viewport. */
+body.editing .phone { transform-origin: top center; }
