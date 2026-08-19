@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Varlıklarım</title>
+<link rel="stylesheet" href="common.css">
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <img id="bg" src="background.png" alt="">
+
+  <!-- Invisible hit areas over icons already present in the screenshot, so the
+       clone looks untouched but is still interactive. -->
+  <button class="hit" id="btnEdit" aria-label="Düzenle" style="left:942px;top:398px;width:90px;height:90px"></button>
+  <button class="hit" id="btnHome" aria-label="Ana Sayfa" style="left:790px;top:398px;width:90px;height:90px"></button>
+
+  <div class="edit-overlay hidden" id="screen-edit">
+    <div class="edit-head">
+      <button id="btnCancel" aria-label="Geri">
+        <svg viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2>Değerleri Düzenle</h2>
+      <span style="width:2.2em"></span>
+    </div>
+    <div class="edit-body">
+      <div class="edit-card" id="editFields"></div>
+    </div>
+    <div class="save-bar"><button class="btn-save" id="btnSave">Kaydet</button></div>
+  </div>
+</div>
+
+<script src="screen.js"></script>
+<script src="common.js"></script>
+</body>
+</html>
