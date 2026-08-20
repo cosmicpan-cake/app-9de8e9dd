@@ -74,10 +74,10 @@ window.SCREEN = {
     // The marker strokes are drawn over the ones baked into the plate, nudged a
     // little on each visit so repeated screenshots do not carry an identical
     // scribble. The baked ones stay put, so nothing underneath is uncovered.
-    { id: "marker", left: 39, top: 134, h: 75, size: 1, weight: 400,
+    { id: "marker", left: 288, top: 161, h: 48, size: 1, weight: 400,
       get: function () {
         function jitter(n) { return (Math.random() * 2 - 1) * n; }
-        return { html: '<img src="marker.png" width="843" height="75" ' +
+        return { html: '<img src="marker.png" width="189" height="48" ' +
                  'style="transform:translate(' + jitter(5).toFixed(1) + 'px,' +
                  jitter(4).toFixed(1) + 'px) rotate(' + jitter(2.2).toFixed(2) +
                  'deg) scale(' + (1 + jitter(0.035)).toFixed(3) + ');' +
