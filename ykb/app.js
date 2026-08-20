@@ -33,6 +33,8 @@
     if (window.GLOBAL_PRICE) {
       var g = window.GLOBAL_PRICE.priceFor(s.ts);
       if (g !== null) s.fiyat = g;
+      var gd = window.GLOBAL_PRICE.changeFor(s.ts);
+      if (gd !== null) s.degisim = gd;
     }
     return s;
   }
@@ -91,10 +93,9 @@
   function toCommaStr(value) {
     return String(value).replace(".", ",");
   }
-  function fromCommaStr(str) {
-    var val = parseFloat(String(str).replace(",", "."));
-    return isNaN(val) ? 0 : val;
-  }
+  // Either separator may be typed; parse-number.js works out which is the
+  // decimal point.
+  function fromCommaStr(str) { return window.parseTypedNumber(str); }
 
   function renderEditForm() {
     document.getElementById("inFiyat").value = toCommaStr(stock.fiyat);

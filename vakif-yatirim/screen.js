@@ -32,15 +32,15 @@ window.SCREEN = {
   derive: function (s) { return {}; },
 
   overlays: [
-    { id: "toplam", right: 693, top: 415, h: 30, size: 34, weight: 400, color: "#0e0f11",
+    { id: "toplam", right: 693, top: 412, h: 30, size: 35, weight: 600, color: "#0e0f11",
       get: function (s, A) { return PLAIN(s.toplam,2); } },
-    { id: "adet", right: 701, top: 474, h: 31, size: 35, weight: 400, color: "#11257f",
+    { id: "adet", right: 701, top: 471, h: 31, size: 34, weight: 600, color: "#11257f",
       get: function (s, A) { return PLAIN(s.adet,2); } },
-    { id: "sadet", right: 484, top: 474, h: 31, size: 35, weight: 400, color: "#10237e",
+    { id: "sadet", right: 484, top: 471, h: 31, size: 33, weight: 600, color: "#10237e",
       get: function (s, A) { return PLAIN(s.adet,2); } },
-    { id: "maliyet", right: 263, top: 473, h: 31, size: 34, weight: 400, color: "#12267d",
+    { id: "maliyet", right: 263, top: 470, h: 31, size: 36, weight: 600, color: "#12267d",
       get: function (s, A) { return PLAIN(s.maliyet,4); } },
-    { id: "fiyat", right: 75, top: 472, h: 31, size: 34, weight: 400, color: "#12247b",
+    { id: "fiyat", right: 75, top: 469, h: 31, size: 35, weight: 600, color: "#12247b",
       get: function (s, A) { return PLAIN(s.fiyat,2); } }
   ]
 };

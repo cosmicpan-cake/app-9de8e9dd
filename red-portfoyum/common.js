@@ -44,16 +44,17 @@
         }
       }
     } catch (e) {}
-    // A price set on the launcher applies to every screen, unless this screen
-    // was edited more recently than the launcher setting was written.
-    if (window.GLOBAL_PRICE && "fiyat" in base) {
+    // Values set on the launcher apply to every screen, unless this screen was
+    // edited more recently than the launcher setting was written.
+    if (window.GLOBAL_PRICE) {
+      var took = false;
       var g = window.GLOBAL_PRICE.priceFor(savedTs);
-      if (g !== null) {
-        base.fiyat = g;
-        if (C.derive) {
-          var d = C.derive(base);
-          Object.keys(d).forEach(function (k) { base[k] = d[k]; });
-        }
+      if (g !== null && "fiyat" in base) { base.fiyat = g; took = true; }
+      var gd = window.GLOBAL_PRICE.changeFor(savedTs);
+      if (gd !== null && "degisim" in base) { base.degisim = gd; took = true; }
+      if (took && C.derive) {
+        var d = C.derive(base);
+        Object.keys(d).forEach(function (k) { base[k] = d[k]; });
       }
     }
     if (C.battery != null) base.battery = randomBattery(C.battery);
@@ -74,10 +75,9 @@
     return s + (opts.space ? " " : "") + num(Math.abs(n), dec);
   }
   function toLocal(v) { return String(v).replace(".", ","); }
-  function fromLocal(s) {
-    var v = parseFloat(String(s).replace(/\./g, "").replace(",", "."));
-    return isNaN(v) ? 0 : v;
-  }
+  // Either separator may be typed; parse-number.js works out which is the
+  // decimal point.
+  function fromLocal(s) { return window.parseTypedNumber(s); }
 
   var API = { num: num, signed: signed, state: function () { return state; } };
 

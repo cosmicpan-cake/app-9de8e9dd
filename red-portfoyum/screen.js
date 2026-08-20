@@ -34,7 +34,8 @@ window.SCREEN = {
     { id: "bakiye", left: 124, top: 545, h: 60, size: 69, weight: 700, color: "#111111",
       get: function (s, A) {
         var t = A.num(s.bakiye, 2), i = t.indexOf(",");
-        return { html: t.slice(0, i) + '<span class="small">' + t.slice(i) + " TL</span>" };
+        return { html: t.slice(0, i) +
+                 '<span class="small" style="font-weight:500">' + t.slice(i) + " TL</span>" };
       } },
 
     // holdings list — right column
@@ -53,11 +54,15 @@ window.SCREEN = {
 
     // holdings list — left column (the "Adet"/"Son fiyat"/"Maliyet" words stay
     // part of the background image)
-    { id: "adetList",    left: 253, top: 1316, h: 29, size: 40, weight: 400, color: "#504f57",
+    { id: "adetList",    left: 253, top: 1312, h: 29, size: 41, weight: 400, color: "#504f57",
       get: function (s, A) { return A.num(s.adet, 0); } },
-    { id: "fiyatList",   left: 416, top: 1383, h: 37, size: 40, weight: 400, color: "#4c4b51",
+    // the word itself, redrawn rather than left in the background so it can sit
+    // a little further from the quantity
+    { id: "adetWord",    left: 400, top: 1311, h: 31, size: 41, weight: 400, color: "#58575f",
+      get: function () { return "Adet"; } },
+    { id: "fiyatList",   left: 416, top: 1375, h: 37, size: 40, weight: 400, color: "#4c4b51",
       get: function (s, A) { return A.num(s.fiyat, 3) + " TL"; } },
-    { id: "maliyetList", left: 396, top: 1455, h: 38, size: 43, weight: 400, color: "#4e4d56",
+    { id: "maliyetList", left: 396, top: 1448, h: 38, size: 43, weight: 400, color: "#4e4d56",
       get: function (s, A) { return A.num(s.maliyet, 2) + " TL"; } }
   ]
 };

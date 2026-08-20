@@ -34,11 +34,11 @@ window.SCREEN = {
       } },
 
     // sub-row: the "Adet:" / "T2:" / "S.Adet:" labels stay part of the background
-    { id: "adetSub", left: 499,  top: 593, h: 26, size: 30, weight: 400, color: "#434343",
+    { id: "adetSub", left: 499,  top: 588, h: 26, size: 30, weight: 400, color: "#434343",
       get: function (s, A) { return A.num(s.adet, 2); } },
-    { id: "t2Sub",   left: 763,  top: 593, h: 26, size: 30, weight: 400, color: "#434343",
+    { id: "t2Sub",   left: 763,  top: 588, h: 26, size: 30, weight: 400, color: "#434343",
       get: function (s, A) { return A.num(s.adet, 2); } },
-    { id: "sadetSub", left: 1086, top: 593, h: 26, size: 30, weight: 400, color: "#434343",
+    { id: "sadetSub", left: 1086, top: 588, h: 26, size: 30, weight: 400, color: "#434343",
       get: function (s, A) { return A.num(s.adet, 2); } }
   ]
 };

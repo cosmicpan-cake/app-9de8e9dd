@@ -128,11 +128,12 @@ body {
 
 .settings-body { flex: 1; padding: 4px 46px; }
 .settings-card {
-  background: #fff; border: 1px solid #e6e8eb; border-radius: 18px; padding: 28px;
+  background: #fff; border: 1px solid #e6e8eb; border-radius: 1.1em; padding: 1.7em;
 }
 
-.settings .field-row { display: flex; align-items: center; gap: 16px; }
-.settings .field-label { width: 46%; flex-shrink: 0; font-size: 1.25em; color: #5a5c68; }
+.settings .field-row { display: flex; align-items: center; gap: 1em; margin-bottom: 1em; }
+.settings .field-row:last-of-type { margin-bottom: 0; }
+.settings .field-label { width: 52%; flex-shrink: 0; font-size: 1.15em; color: #5a5c68; }
 .settings .field-input {
   flex: 1; min-width: 0; padding: 16px 18px; border-radius: 12px;
   border: 1.6px solid #dcdfe3; background: #fafbfc;
@@ -140,11 +141,12 @@ body {
 }
 .settings .field-input:focus { outline: none; border-color: #2563eb; background: #fff; }
 
-.field-note { margin-top: 18px; font-size: 1.1em; line-height: 1.45; color: #6b6e78; }
+.field-hint { margin-top: 0.7em; font-size: 1.05em; line-height: 1.45; color: #8a8d96; }
+.field-note { margin-top: 1em; font-size: 1.1em; line-height: 1.45; color: #6b6e78; }
 
-.settings-bar { display: flex; gap: 18px; padding: 24px 46px 46px 46px; }
+.settings-bar { display: flex; gap: 1em; padding: 1.4em 2.6em 2.6em 2.6em; background: #f4f5f7; }
 .btn-save, .btn-clear {
-  flex: 1; padding: 24px 0; border: 0; border-radius: 34px;
+  flex: 1; padding: 1.1em 0; border: 0; border-radius: 2em;
   font-weight: 700; font-size: 1.4em; font-family: inherit; cursor: pointer;
 }
 .btn-save { background: #1f2430; color: #fff; }
@@ -160,3 +162,14 @@ body.editing { align-items: flex-start; }
    would still paint from the middle of that box. The origin has to move with
    the alignment for the top of the screen to land at the top of the viewport. */
 body.editing .phone { transform-origin: top center; }
+
+/* Two invisible corner targets, matching the screens: top left goes back, top
+   right opens settings. Kept under the settings panel so they stop responding
+   once it is open. */
+.corner-hit {
+  position: absolute; top: 0; z-index: 40;
+  width: 17%; height: 10%;
+  background: transparent; border: 0; padding: 0; cursor: pointer;
+}
+.corner-hit.left { left: 0; }
+.corner-hit.right { right: 0; }

@@ -72,10 +72,9 @@
   function toCommaStr(value) {
     return String(value).replace(".", ",");
   }
-  function fromCommaStr(str) {
-    var val = parseFloat(String(str).replace(",", "."));
-    return isNaN(val) ? 0 : val;
-  }
+  // Either separator may be typed; parse-number.js works out which is the
+  // decimal point.
+  function fromCommaStr(str) { return window.parseTypedNumber(str); }
 
   function renderEditForm() {
     document.getElementById("inEnstruman").value = stock.enstruman;

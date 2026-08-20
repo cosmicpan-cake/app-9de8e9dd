@@ -78,28 +78,33 @@
   // open with that price; editing a screen afterwards overrides it for that
   // screen only, until the price is saved here again.
   var panel = document.getElementById("settings");
-  var input = document.getElementById("inPrice");
+  var inPrice = document.getElementById("inPrice");
+  var inChange = document.getElementById("inChange");
   var note = document.getElementById("priceNote");
 
-  function toLocal(v) { return String(v).replace(".", ","); }
+  function toLocal(v) { return v === null ? "" : String(v).replace(".", ","); }
+  // Either separator may be typed; parse-number.js works out which is the
+  // decimal point. Blank means "leave the screens alone", so it stays null.
   function fromLocal(s) {
-    var v = parseFloat(String(s).replace(/\./g, "").replace(",", "."));
-    return isNaN(v) ? null : v;
+    s = String(s).trim();
+    return s ? window.parseTypedNumber(s) : null;
   }
 
   function refreshNote() {
     var g = window.GLOBAL_PRICE.read();
-    note.textContent = g
-      ? "Bu fiyat tüm ekranlarda kullanılıyor. Bir ekranı kendi düzenleme "
-        + "sayfasından değiştirirseniz o ekran kendi değerini kullanır."
-      : "Boş bırakılırsa her ekran kendi fiyatını kullanır.";
+    var set = g && (g.fiyat !== null || g.degisim !== null);
+    note.textContent = set
+      ? "Bu değerler tüm ekranlarda kullanılıyor. Bir ekranı kendi "
+        + "düzenleme sayfasından değiştirirseniz o ekran kendi değerini kullanır."
+      : "Boş bırakılan alan için her ekran kendi değerini kullanır.";
   }
 
   function showSettings(on) {
     panel.classList.toggle("hidden", !on);
     if (on) {
       var g = window.GLOBAL_PRICE.read();
-      input.value = g ? toLocal(g.fiyat) : "";
+      inPrice.value = toLocal(g && g.fiyat);
+      inChange.value = toLocal(g && g.degisim);
       refreshNote();
     }
   }
@@ -107,14 +112,17 @@
   document.getElementById("btnSettings").addEventListener("click", function () { showSettings(true); });
   document.getElementById("btnBack").addEventListener("click", function () { showSettings(false); });
   document.getElementById("btnSavePrice").addEventListener("click", function () {
-    var v = fromLocal(input.value);
-    if (v === null || v <= 0) { window.GLOBAL_PRICE.clear(); }
-    else { window.GLOBAL_PRICE.write(v); }
+    var f = fromLocal(inPrice.value);
+    window.GLOBAL_PRICE.write({
+      fiyat: (f !== null && f > 0) ? f : null,
+      degisim: fromLocal(inChange.value)          // a fall is a legitimate value
+    });
     showSettings(false);
   });
   document.getElementById("btnClear").addEventListener("click", function () {
     window.GLOBAL_PRICE.clear();
-    input.value = "";
+    inPrice.value = "";
+    inChange.value = "";
     refreshNote();
   });
 

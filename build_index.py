@@ -39,6 +39,7 @@ SCREENS = [
     ("emir-girisi", u"Emir Girişi"),
     ("vakif-yatirim", u"Vakıf Yatırım"),
     ("toplu-emir", u"Toplu Emir"),
+    ("pdf-rapor", u"PDF Rapor"),
 ]
 
 HEAD = u"""<!DOCTYPE html>
@@ -83,6 +84,11 @@ FOOT = u"""  </div>
           <span class="field-label">IEYHO Son Fiyat</span>
           <input class="field-input" type="text" inputmode="decimal" id="inPrice" placeholder="örn. 179,60">
         </div>
+        <div class="field-row">
+          <span class="field-label">IEYHO Değişim %</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inChange" placeholder="örn. 4,12">
+        </div>
+        <p class="field-hint">Hissenin günlük fiyat değişimi %'si</p>
         <p class="field-note" id="priceNote"></p>
       </div>
     </div>
@@ -99,8 +105,11 @@ FOOT = u"""  </div>
   </div>
 </div>
 
+<script src="parse-number.js"></script>
+<script src="keyboard.js"></script>
 <script src="global-price.js"></script>
 <script src="app.js"></script>
+<script src="shell.js"></script>
 </body>
 </html>
 """

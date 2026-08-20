@@ -64,6 +64,8 @@
       if (s.id !== "IEYHO") return;
       var g = window.GLOBAL_PRICE.priceFor(s.ts);
       if (g !== null) s.fiyat = g;
+      var gd = window.GLOBAL_PRICE.changeFor(s.ts);
+      if (gd !== null) s.degisim = gd;
     });
     return stocks;
   }
@@ -259,10 +261,9 @@
   function toCommaStr(value) {
     return String(value).replace(".", ",");
   }
-  function fromCommaStr(str) {
-    var val = parseFloat(String(str).replace(",", "."));
-    return isNaN(val) ? 0 : val;
-  }
+  // Either separator may be typed; parse-number.js works out which is the
+  // decimal point.
+  function fromCommaStr(str) { return window.parseTypedNumber(str); }
 
   function field(labelText, idx, key, value) {
     return (

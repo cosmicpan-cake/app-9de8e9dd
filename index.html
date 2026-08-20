@@ -12,7 +12,7 @@
   <div class="header">
     <div class="header-text">
       <div class="header-title">Portföy Uygulamaları</div>
-      <div class="header-subtitle">30 ekran &middot; bir tanesini seçin</div>
+      <div class="header-subtitle">31 ekran &middot; bir tanesini seçin</div>
     </div>
     <button class="gear" id="btnSettings" aria-label="Ayarlar">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -119,6 +119,9 @@
       <a class="tile" href="toplu-emir/index.html">
         <span class="tile-shot"><img src="icons/toplu-emir.jpg" alt="" loading="lazy"></span>
         <span class="tile-label"><b>30.</b> Toplu Emir</span></a>
+      <a class="tile" href="pdf-rapor/index.html">
+        <span class="tile-shot"><img src="icons/pdf-rapor.jpg" alt="" loading="lazy"></span>
+        <span class="tile-label"><b>31.</b> PDF Rapor</span></a>
     </div>
   </div>
 
@@ -136,6 +139,11 @@
           <span class="field-label">IEYHO Son Fiyat</span>
           <input class="field-input" type="text" inputmode="decimal" id="inPrice" placeholder="örn. 179,60">
         </div>
+        <div class="field-row">
+          <span class="field-label">IEYHO Değişim %</span>
+          <input class="field-input" type="text" inputmode="decimal" id="inChange" placeholder="örn. 4,12">
+        </div>
+        <p class="field-hint">Hissenin günlük fiyat değişimi %'si</p>
         <p class="field-note" id="priceNote"></p>
       </div>
     </div>
@@ -152,8 +160,10 @@
   </div>
 </div>
 
+<script src="parse-number.js"></script>
 <script src="keyboard.js"></script>
 <script src="global-price.js"></script>
 <script src="app.js"></script>
+<script src="shell.js"></script>
 </body>
 </html>

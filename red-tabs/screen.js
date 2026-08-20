@@ -35,7 +35,7 @@ window.SCREEN = {
       get: function (s, A) { return A.num(s.maliyet, 3); } },
 
     // The K/Z pill is redrawn rather than part-erased, so its corners stay round.
-    { id: "kzPill", left: 455, top: 394, w: 105, h: 46, size: 22, weight: 600,
+    { id: "kzPill", left: 455, top: 392, w: 105, h: 46, size: 17, weight: 600,
       bg: "#baf3c0", radius: 8,
       get: function (s, A) {
         return { color: s.kz >= 0 ? "#268a2a" : "#b3261e", text: A.num(s.kz, 2) };
@@ -44,7 +44,7 @@ window.SCREEN = {
     // Hesap Özeti
     { id: "toplam", right: 364, top: 1100, h: 22, size: 23, weight: 700, color: "#111111",
       get: function (s, A) { return A.num(s.toplam, 2); } },
-    { id: "toplamKz", right: 99, top: 1100, h: 22, size: 24, weight: 700,
+    { id: "toplamKz", right: 99, top: 1095, h: 22, size: 24, weight: 700,
       get: function (s, A) {
         return { color: s.kz >= 0 ? "#3f8a1e" : "#b3261e", text: A.num(s.kz, 2) };
       } }

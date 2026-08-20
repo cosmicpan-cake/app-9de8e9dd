@@ -33,9 +33,9 @@ window.SCREEN = {
   derive: function (s) { return {tutar:s.adet*s.fiyat, kz:s.adet*(s.fiyat-s.maliyet)}; },
 
   overlays: [
-    { id: "clock", left: 1184, top: 17, h: 36, size: 35, weight: 400, color: "#fffcf2",
+    { id: "clock", left: 1162, top: 15, h: 35, size: 44, weight: 400, color: "#fffcf2",
       get: function (s, A) { return s.saat; } },
-    { id: "stok", left: 151, top: 177, h: 43, size: 44, weight: 400, color: "#000309",
+    { id: "stok", left: 147, top: 175, h: 41, size: 45, weight: 400, color: "#000309",
       get: function (s, A) { return US(s.adet,0); } },
     { id: "adet", right: 306, top: 138, h: 37, size: 47, weight: 400, color: "#030304",
       get: function (s, A) { return String(Math.round(s.adet)); } },

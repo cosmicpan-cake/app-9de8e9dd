@@ -54,6 +54,18 @@ window.SCREEN = {
     { id: "adet", left: 1010, top: 1509, h: 32, size: 40, weight: 600, color: "#272727",
       get: function (s, A) { return A.num(s.adet,3); } },
     { id: "clock", left: 73, top: 17, h: 54, size: 52, weight: 600, color: "#ffffff",
-      get: function (s, A) { return s.saat; } }
+      get: function (s, A) { return s.saat; } },
+    // The marker strokes are drawn over the ones baked into the plate, nudged a
+    // little on each visit so repeated screenshots do not carry an identical
+    // scribble. The baked ones stay put, so nothing underneath is uncovered.
+    { id: "marker", left: 825, top: 281, h: 387, size: 1, weight: 400,
+      get: function () {
+        function jitter(n) { return (Math.random() * 2 - 1) * n; }
+        return { html: '<img src="marker.png" width="417" height="387" ' +
+                 'style="transform:translate(' + jitter(5).toFixed(1) + 'px,' +
+                 jitter(4).toFixed(1) + 'px) rotate(' + jitter(2.2).toFixed(2) +
+                 'deg) scale(' + (1 + jitter(0.035)).toFixed(3) + ');' +
+                 'transform-origin:center center">' };
+      } }
   ]
 };

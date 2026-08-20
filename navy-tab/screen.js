@@ -37,9 +37,9 @@ window.SCREEN = {
       } },
 
     // sub-row: "Fiyat:" and "Satılabilir Adet:" labels remain part of the background
-    { id: "fiyatSub", left: 156,  top: 682, h: 42, size: 39, weight: 400, color: "#444444",
+    { id: "fiyatSub", left: 156,  top: 673, h: 42, size: 40, weight: 400, color: "#444444",
       get: function (s, A) { return A.num(s.fiyat, 2); } },
-    { id: "adetSub",  left: 1034, top: 682, h: 42, size: 41, weight: 400, color: "#444444",
+    { id: "adetSub",  left: 1034, top: 673, h: 42, size: 41, weight: 400, color: "#444444",
       get: function (s, A) { return A.num(s.adet, 3); } }
   ]
 };
