@@ -82,11 +82,11 @@ FOOT = u"""  </div>
       <div class="settings-card">
         <div class="field-row">
           <span class="field-label">IEYHO Son Fiyat</span>
-          <input class="field-input" type="text" inputmode="decimal" id="inPrice" placeholder="örn. 179,60">
+          <input class="field-input" type="text" inputmode="decimal" id="inPrice" placeholder="179,60">
         </div>
         <div class="field-row">
           <span class="field-label">IEYHO Değişim %</span>
-          <input class="field-input" type="text" inputmode="decimal" id="inChange" placeholder="örn. 4,12">
+          <input class="field-input" type="text" inputmode="decimal" id="inChange" placeholder="4,12">
         </div>
         <p class="field-hint">Hissenin günlük fiyat değişimi %'si</p>
         <p class="field-note" id="priceNote"></p>

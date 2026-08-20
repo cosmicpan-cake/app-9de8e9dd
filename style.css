@@ -133,9 +133,9 @@ body {
 
 .settings .field-row { display: flex; align-items: center; gap: 1em; margin-bottom: 1em; }
 .settings .field-row:last-of-type { margin-bottom: 0; }
-.settings .field-label { width: 52%; flex-shrink: 0; font-size: 1.15em; color: #5a5c68; }
+.settings .field-label { width: 44%; flex-shrink: 0; font-size: 1.15em; color: #5a5c68; }
 .settings .field-input {
-  flex: 1; min-width: 0; padding: 16px 18px; border-radius: 12px;
+  flex: 1; min-width: 0; padding: 0.65em 0.8em; border-radius: 0.6em;
   border: 1.6px solid #dcdfe3; background: #fafbfc;
   font-size: 1.35em; color: #14161f; font-family: inherit;
 }
@@ -173,3 +173,17 @@ body.editing .phone { transform-origin: top center; }
 }
 .corner-hit.left { left: 0; }
 .corner-hit.right { right: 0; }
+
+/* The edit screen is moved out of the scaled canvas by shell.js and sized to
+   the device instead, so every screen's form is the same comfortable size no
+   matter how tall or wide its canvas happens to be. Height is set from the
+   visual viewport, which puts the save button above the keyboard for free. */
+.edit-overlay.sheet, .settings.sheet {
+  position: fixed; left: 0; right: 0; top: 0;
+  width: 100%; max-width: 620px;
+  height: 100%;
+  margin: 0 auto;
+  z-index: 200;
+  font-size: clamp(15px, 4.1vw, 20px);
+  box-shadow: 0 0 60px rgba(0,0,0,0.25);
+}

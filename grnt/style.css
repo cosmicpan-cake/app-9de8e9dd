@@ -236,3 +236,17 @@ body.editing .phone { transform-origin: top center; }
 }
 .corner-hit.left { left: 0; }
 .corner-hit.right { right: 0; }
+
+/* The edit screen is moved out of the scaled canvas by shell.js and sized to
+   the device instead, so every screen's form is the same comfortable size no
+   matter how tall or wide its canvas happens to be. Height is set from the
+   visual viewport, which puts the save button above the keyboard for free. */
+.edit-overlay.sheet, .settings.sheet {
+  position: fixed; left: 0; right: 0; top: 0;
+  width: 100%; max-width: 620px;
+  height: 100%;
+  margin: 0 auto;
+  z-index: 200;
+  font-size: clamp(15px, 4.1vw, 20px);
+  box-shadow: 0 0 60px rgba(0,0,0,0.25);
+}
