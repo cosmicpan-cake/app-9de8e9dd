@@ -166,32 +166,32 @@ body {
 
 .edit-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 40px 36px 20px 36px;
+  padding: 1.9em 1.9em 1em 1.9em;
 }
-.edit-header h2 { font-size: 36px; font-weight: 800; color: #14161f; }
-.edit-header .icon-btn { position: static; width: 40px; height: 40px; color: #14161f; }
-.edit-header .icon-btn svg { width: 40px; height: 40px; }
+.edit-header h2 { font-size: 1.6em; font-weight: 800; color: #14161f; }
+.edit-header .icon-btn { position: static; width: 2.2em; height: 2.2em; color: #14161f; }
+.edit-header .icon-btn svg { width: 100%; height: 100%; }
 
 .edit-scroll { flex: 1; overflow-y: auto; padding: 0.5em 1.9em 1.5em 1.9em; }
 
 .edit-group {
-  background: #fff; border: 1px solid #e6e8eb; border-radius: 20px;
-  padding: 28px 28px 12px 28px; margin-bottom: 28px;
+  background: #fff; border: 1px solid #e6e8eb; border-radius: 1em;
+  padding: 1.4em 1.4em 0.6em 1.4em; margin-bottom: 1.4em;
 }
-.edit-group-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
-.visible-checkbox { width: 26px; height: 26px; flex-shrink: 0; margin-top: 3px; accent-color: #06a4a1; cursor: pointer; }
-.edit-group h3 { font-size: 26px; font-weight: 800; color: #14161f; }
-.checkbox-label { font-size: 24px; color: #14161f; }
+.edit-group-header { display: flex; align-items: flex-start; gap: 0.75em; margin-bottom: 1em; }
+.visible-checkbox { width: 1.4em; height: 1.4em; flex-shrink: 0; margin-top: 0.15em; accent-color: #06a4a1; cursor: pointer; }
+.edit-group h3 { font-size: 1.25em; font-weight: 800; color: #14161f; }
+.checkbox-label { font-size: 1.15em; color: #14161f; }
 
-.time-row { margin-bottom: 24px; }
-.time-input { flex: 0 0 100px; text-align: center; }
-.time-colon { font-size: 28px; font-weight: 700; color: #14161f; }
+.time-row { margin-bottom: 1.2em; }
+.time-input { flex: 0 0 5em; text-align: center; }
+.time-colon { font-size: 1.35em; font-weight: 700; color: #14161f; }
 
 .field-row {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 0.75em; margin-bottom: 1em;
 }
 .field-label {
-  width: 13em; flex-shrink: 0; font-size: 1.2em; color: #5a5c68;
+  width: 44%; flex-shrink: 0; font-size: 1.2em; color: #5a5c68;
 }
 .field-input {
   flex: 1; min-width: 0; padding: 0.65em 0.8em; border-radius: 0.6em; border: 1.6px solid #dcdfe3;
@@ -201,8 +201,8 @@ body {
 
 .save-bar { padding: 1.1em 1.9em 1.6em 1.9em; background: #f4f5f7; }
 .btn-save {
-  width: 100%; padding: 24px 0; border-radius: 40px; border: none;
-  background: #06a4a1; color: #fff; font-weight: 700; font-size: 28px; font-family: inherit;
+  width: 100%; padding: 0.8em 0; border-radius: 2em; border: none;
+  background: #06a4a1; color: #fff; font-weight: 700; font-size: 1.4em; font-family: inherit;
 }
 .btn-save:active { background: #058886; }
 
