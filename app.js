@@ -129,7 +129,8 @@
     }
     liveStatus.classList.add("ok");
     liveStatus.textContent = "BIST " + fmtNum(q.fiyat) +
-      (q.degisim == null ? "" : "  %" + fmtNum(q.degisim)) +
+      // sign ahead of the percent sign, so a fall reads as -%0,80
+      (q.degisim == null ? "" : "  " + (q.degisim < 0 ? "-" : "") + "%" + fmtNum(Math.abs(q.degisim))) +
       "  (" + fmtTime(q.marketTime || q.fetchedAt) + ")";
     btnLive.disabled = false;
   }
