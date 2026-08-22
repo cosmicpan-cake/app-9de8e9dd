@@ -127,11 +127,17 @@
       btnLive.disabled = true;
       return;
     }
-    liveStatus.classList.add("ok");
-    liveStatus.textContent = "BIST " + fmtNum(q.fiyat) +
-      // sign ahead of the percent sign, so a fall reads as -%0,80
-      (q.degisim == null ? "" : "  " + (q.degisim < 0 ? "-" : "") + "%" + fmtNum(Math.abs(q.degisim))) +
-      "  (" + fmtTime(q.marketTime || q.fetchedAt) + ")";
+    // Only the percentage carries a colour, red for a fall — the price itself
+    // is not up or down on its own. Built from numbers we formatted, never
+    // from anything typed.
+    var pct = "";
+    if (q.degisim != null) {
+      pct = ' <span class="pct ' + (q.degisim < 0 ? "down" : "up") + '">' +
+            (q.degisim < 0 ? "−" : "+") + "%" + fmtNum(Math.abs(q.degisim)) +
+            "</span>";
+    }
+    liveStatus.innerHTML = "BIST " + fmtNum(q.fiyat) + pct +
+      ' <span class="at">(' + fmtTime(q.marketTime || q.fetchedAt) + ")</span>";
     btnLive.disabled = false;
   }
 

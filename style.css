@@ -208,16 +208,19 @@ body.editing .phone { transform-origin: top center; }
 .field-row.stacked .field-label { width: auto; }
 
 /* Live-quote controls on the settings screen. */
+/* Quote above, button below, so the figures read as a line of their own. */
 .live-row {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 0.6em 1em;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.7em;
   margin-top: 1em; padding-top: 1em; border-top: 1px solid #eceef2;
 }
-.live-status { flex: 1 1 60%; font-size: 1.05em; color: #6b6e78; min-width: 0; }
-.live-status.ok { color: #1a8f4a; }
-.live-status.err { color: #c0392b; }
+.live-status { width: 100%; font-size: 1.15em; font-weight: 600; color: #14161f; }
+.live-status.err { font-size: 1.05em; font-weight: 400; color: #c0392b; }
+.live-status .pct { font-weight: 700; }
+.live-status .pct.up { color: #1a8f4a; }
+.live-status .pct.down { color: #c0392b; }
+.live-status .at { font-weight: 400; color: #8a8d96; }
 .btn-live {
-  flex: 0 0 auto; padding: 0.55em 1em; border: 1.6px solid #dcdfe3;
+  flex: 0 0 auto; align-self: flex-start; padding: 0.55em 1em; border: 1.6px solid #dcdfe3;
   border-radius: 0.6em; background: #fff; color: #14161f;
   font-size: 1.05em; font-weight: 600; font-family: inherit; cursor: pointer;
 }
