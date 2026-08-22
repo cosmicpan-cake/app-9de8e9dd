@@ -1,0 +1,42 @@
+name: IEYHO quote
+
+# Yahoo refuses browser requests (no CORS headers), so the page cannot call it
+# directly. A runner has no such restriction: it fetches the quote and commits
+# it as quote.json, which the page then reads from its own origin. No API key,
+# nothing to leak, and it is already there on first load.
+
+on:
+  schedule:
+    - cron: "*/15 6,7,8,9,10,11,12,13,14 * * 1-5"   # ~09:00-17:00 Istanbul, weekdays
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths: [.github/workflows/quote.yml, scripts/fetch-quote.js]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quote
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the quote
+        run: node scripts/fetch-quote.js
+
+      - name: Commit if it moved
+        run: |
+          if git diff --quiet -- quote.json; then
+            echo "unchanged"
+            exit 0
+          fi
+          git config user.name  "quote-bot"
+          git config user.email "quote-bot@users.noreply.github.com"
+          git add quote.json
+          git commit -m "IEYHO quote $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push

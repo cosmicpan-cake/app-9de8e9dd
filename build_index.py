@@ -95,14 +95,10 @@ FOOT = u"""  </div>
           <b>&minus;</b> düğmesine dokunun.</p>
         <div class="live-row">
           <span class="live-status" id="liveStatus">Canlı veri kapalı</span>
-          <button type="button" class="btn-live" id="btnLive">Canlı veriyi al</button>
+          <button type="button" class="btn-live" id="btnLive">Canlı veriyi kullan</button>
         </div>
-        <div class="field-row stacked">
-          <span class="field-label">Twelve Data API anahtarı</span>
-          <input class="field-input" type="text" id="inApiKey" placeholder="twelvedata.com&apos;dan ücretsiz">
-        </div>
-        <p class="field-hint">Borsa İstanbul fiyatını otomatik almak için gerekir.
-          Anahtar yalnızca bu telefonda saklanır.</p>
+        <p class="field-hint">Borsa İstanbul verisi uygulama açılırken otomatik alınır.
+          <b>Canlı veriyi kullan</b> ile alanlara yazılır.</p>
         <p class="field-note" id="priceNote"></p>
       </div>
     </div>

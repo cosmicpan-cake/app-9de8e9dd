@@ -101,14 +101,17 @@
 
 
   // ---------------- live quote ----------------
-  // With an API key set, IEYHO's price and daily change are fetched when the
-  // app opens and pre-filled here. Saving is still a deliberate tap, so a
-  // fetch never quietly overrides a screen that was edited by hand.
-  var inKey = document.getElementById("inApiKey");
+  // quote.json is refreshed by a scheduled job and read from our own origin, so
+  // it needs no key and is available the moment the app loads. Applying it to
+  // the screens is still a deliberate tap, so a refresh never quietly
+  // overrides a screen that was edited by hand.
   var liveStatus = document.getElementById("liveStatus");
   var btnLive = document.getElementById("btnLive");
   var live = null;
 
+  function fmtNum(n) {
+    return n.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
   function fmtTime(ms) {
     var d = new Date(ms);
     return ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
@@ -116,45 +119,41 @@
 
   function showLive(q) {
     liveStatus.className = "live-status";
-    if (!window.LIVE_QUOTE.hasKey()) { liveStatus.textContent = "Canlı veri kapalı"; return; }
-    if (!q) { liveStatus.textContent = "Canlı veri alınıyor…"; return; }
+    if (!q) { liveStatus.textContent = "Canlı veri alınıyor…"; btnLive.disabled = true; return; }
     if (q.error) {
       liveStatus.classList.add("err");
-      // providers can return an essay; one line is enough to act on
       liveStatus.textContent = "Alınamadı: " +
         (q.error.length > 70 ? q.error.slice(0, 70) + "…" : q.error);
+      btnLive.disabled = true;
       return;
     }
     liveStatus.classList.add("ok");
-    liveStatus.textContent = "BIST " + q.fiyat.toLocaleString("tr-TR", {minimumFractionDigits: 2, maximumFractionDigits: 2}) +
-      (q.degisim == null ? "" : "  %" + q.degisim.toLocaleString("tr-TR", {minimumFractionDigits: 2, maximumFractionDigits: 2})) +
-      "  (" + fmtTime(q.at) + ")";
+    liveStatus.textContent = "BIST " + fmtNum(q.fiyat) +
+      (q.degisim == null ? "" : "  %" + fmtNum(q.degisim)) +
+      "  (" + fmtTime(q.marketTime || q.fetchedAt) + ")";
+    btnLive.disabled = false;
   }
 
-  function applyLiveToInputs(q) {
-    if (!q || q.error) return;
-    inPrice.value = toLocal(Math.round(q.fiyat * 100) / 100);
-    if (q.degisim != null) inChange.value = toLocal(Math.round(q.degisim * 100) / 100);
+  function applyLive() {
+    if (!live || live.error) return;
+    inPrice.value = toLocal(live.fiyat);
+    if (live.degisim != null) inChange.value = toLocal(live.degisim);
     if (window.SIGN_FIELDS) window.SIGN_FIELDS();
   }
 
-  function refreshLive(useCache) {
-    if (!window.LIVE_QUOTE.hasKey()) { live = null; showLive(null); return; }
-    showLive(null);
-    btnLive.disabled = true;
-    (useCache ? window.LIVE_QUOTE.get() : window.LIVE_QUOTE.fetchNow())
-      .then(function (q) { live = q; showLive(q); btnLive.disabled = false; });
-  }
+  btnLive.addEventListener("click", applyLive);
 
-  btnLive.addEventListener("click", function () {
-    window.LIVE_QUOTE.setKey(inKey.value);
-    refreshLive(false);
+  // fetched as the app opens, so the values are ready when settings open
+  window.LIVE_QUOTE.get().then(function (q) {
+    live = q;
+    // On a first run nothing has been set yet, so adopt the live quote outright
+    // — the app then shows real Borsa İstanbul figures with no interaction at
+    // all. Once anything has been saved, applying stays a deliberate tap.
+    if (!q.error && !window.GLOBAL_PRICE.read()) {
+      window.GLOBAL_PRICE.write({ fiyat: q.fiyat, degisim: q.degisim });
+    }
+    if (!panel.classList.contains("hidden")) showLive(q);
   });
-
-  // fetched once as the app opens, so the values are ready when settings open
-  if (window.LIVE_QUOTE.hasKey()) {
-    window.LIVE_QUOTE.get().then(function (q) { live = q; });
-  }
 
   function showSettings(on) {
     panel.classList.toggle("hidden", !on);
@@ -162,19 +161,15 @@
       var g = window.GLOBAL_PRICE.read();
       inPrice.value = toLocal(g && g.fiyat);
       inChange.value = toLocal(g && g.degisim);
-      inKey.value = window.LIVE_QUOTE.getKey();
-      applyLiveToInputs(live);            // a live quote wins over the stored one
       if (window.SIGN_FIELDS) window.SIGN_FIELDS();
       showLive(live);
       refreshNote();
-      if (window.LIVE_QUOTE.hasKey() && !live) refreshLive(true);
     }
   }
 
   document.getElementById("btnSettings").addEventListener("click", function () { showSettings(true); });
   document.getElementById("btnBack").addEventListener("click", function () { showSettings(false); });
   document.getElementById("btnSavePrice").addEventListener("click", function () {
-    window.LIVE_QUOTE.setKey(inKey.value);
     var f = fromLocal(inPrice.value);
     window.GLOBAL_PRICE.write({
       fiyat: (f !== null && f > 0) ? f : null,
