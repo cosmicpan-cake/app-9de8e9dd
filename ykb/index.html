@@ -49,9 +49,12 @@
           <span class="field-label">Fiyat (TL)</span>
           <input class="field-input" type="text" inputmode="decimal" id="inFiyat">
         </div>
-        <div class="field-row">
+        <div class="field-row stacked">
           <span class="field-label">De&#287;i&#351;im (%)</span>
-          <input class="field-input" type="text" inputmode="decimal" id="inDegisim">
+          <div class="input-group">
+            <button type="button" class="sign-toggle" data-for="inDegisim" aria-label="Art&#305; / eksi">+</button>
+            <input class="field-input" type="text" inputmode="decimal" id="inDegisim">
+          </div>
         </div>
         <div class="field-row">
           <span class="field-label">G&uuml;ncel Adet</span>

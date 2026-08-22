@@ -267,19 +267,28 @@
 
   function field(labelText, idx, key, value) {
     return (
-      '<div class="field-row">' +
+      '<div class="field-row stacked">' +
         '<span class="field-label">' + labelText + '</span>' +
         '<input class="field-input" type="text" inputmode="decimal" data-idx="' + idx + '" data-key="' + key + '" value="' + toCommaStr(value) + '">' +
       '</div>'
     );
   }
 
+  /* Fiyat and Değişim used to share one row, which left neither field wide
+     enough to read. They are separate stacked rows now, and Değişim carries a
+     sign button because a phone's decimal keypad has no minus key. */
   function fieldPair(labelText, idx, key1, value1, title1, key2, value2, title2) {
     return (
-      '<div class="field-row">' +
-        '<span class="field-label">' + labelText + '</span>' +
-        '<input class="field-input" type="text" inputmode="decimal" title="' + title1 + '" data-idx="' + idx + '" data-key="' + key1 + '" value="' + toCommaStr(value1) + '">' +
-        '<input class="field-input" type="text" inputmode="decimal" title="' + title2 + '" data-idx="' + idx + '" data-key="' + key2 + '" value="' + toCommaStr(value2) + '">' +
+      '<div class="field-row stacked">' +
+        '<span class="field-label">' + title1 + '</span>' +
+        '<input class="field-input" type="text" inputmode="decimal" data-idx="' + idx + '" data-key="' + key1 + '" value="' + toCommaStr(value1) + '">' +
+      '</div>' +
+      '<div class="field-row stacked">' +
+        '<span class="field-label">' + title2 + '</span>' +
+        '<div class="input-group">' +
+          '<button type="button" class="sign-toggle" aria-label="Artı / eksi">+</button>' +
+          '<input class="field-input" type="text" inputmode="decimal" data-idx="' + idx + '" data-key="' + key2 + '" value="' + toCommaStr(value2) + '">' +
+        '</div>' +
       '</div>'
     );
   }
@@ -314,6 +323,7 @@
 
   document.getElementById("btnEdit").addEventListener("click", function () {
     renderEditForm();
+    if (window.SIGN_FIELDS) window.SIGN_FIELDS();
     showEdit(true);
   });
   document.getElementById("btnCancelEdit").addEventListener("click", function () { showEdit(false); });

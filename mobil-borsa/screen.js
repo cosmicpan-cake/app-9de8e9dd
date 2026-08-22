@@ -11,7 +11,7 @@ window.SCREEN = {
     { id: "adet",    label: "Güncel Adet",   def: 92120 },
     { id: "fiyat",   label: "Son Fiyat",     def: 179.10 },
     { id: "maliyet", label: "Maliyet",       def: 168.12 },
-    { id: "degisim", label: "Günlük Değişim %", def: 3.83 }
+    { id: "degisim", label: "Günlük Değişim %", def: 3.83, signed: true }
   ],
 
   // Values the screenshot shows that don't reconcile exactly with adet x fiyat

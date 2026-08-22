@@ -67,9 +67,61 @@
     panels().forEach(function (o) { o.style.height = vh + "px"; });
   }
 
+
+  // ---------------- sign toggle ----------------
+  // A phone's decimal keypad has no minus key, so any field that can hold a
+  // negative number gets a button that flips the sign of what is typed. The
+  // input keeps the sign in its own text, so everything that reads the field
+  // carries on working unchanged.
+
+  function signOf(input) { return /^\s*-/.test(input.value) ? "-" : "+"; }
+
+  function paintSign(btn, input) {
+    var neg = signOf(input) === "-";
+    btn.textContent = neg ? "−" : "+";
+    btn.classList.toggle("neg", neg);
+    btn.setAttribute("aria-pressed", neg ? "true" : "false");
+  }
+
+  function inputFor(btn) {
+    return document.getElementById(btn.getAttribute("data-for")) ||
+           btn.parentNode.querySelector("input");
+  }
+
+  // Delegated, because some screens rebuild their form every time it opens.
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest(".sign-toggle");
+    if (!btn) return;
+    var input = inputFor(btn);
+    if (!input) return;
+    input.value = signOf(input) === "-"
+      ? input.value.replace(/^\s*-\s*/, "")
+      : "-" + input.value.replace(/^\s*\+\s*/, "");
+    paintSign(btn, input);
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+  // Typing a sign by hand (desktop) keeps the button in step.
+  document.addEventListener("input", function (e) {
+    if (!e.target.matches || !e.target.matches("input")) return;
+    var btn = document.querySelector('.sign-toggle[data-for="' + e.target.id + '"]') ||
+              (e.target.parentNode.querySelector ? e.target.parentNode.querySelector(".sign-toggle") : null);
+    if (btn) paintSign(btn, e.target);
+  });
+
+  // Exposed so a form built after load can colour its buttons right away.
+  window.SIGN_FIELDS = function () {
+    var list = document.querySelectorAll(".sign-toggle");
+    for (var i = 0; i < list.length; i++) {
+      var input = inputFor(list[i]);
+      if (input) paintSign(list[i], input);
+    }
+  };
+
   function start() {
     addCorners();
     detach();
+    window.SIGN_FIELDS();
     fitPanels();
 
     ["resize", "orientationchange", "focusin", "focusout"].forEach(function (e) {

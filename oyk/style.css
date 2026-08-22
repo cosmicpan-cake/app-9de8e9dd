@@ -138,3 +138,22 @@ body.editing .phone { transform-origin: top center; }
   font-size: clamp(15px, 4.1vw, 20px);
   box-shadow: 0 0 60px rgba(0,0,0,0.25);
 }
+
+/* A field that can go negative pairs its input with a sign button, because a
+   phone's decimal keypad offers no minus key. */
+.input-group { flex: 1; min-width: 0; display: flex; gap: 0.5em; align-items: stretch; }
+.input-group .field-input { flex: 1; min-width: 0; }
+.sign-toggle {
+  flex: 0 0 auto; width: 2.8em;
+  border: 1.6px solid #dcdfe3; border-radius: 0.6em;
+  background: #fff; color: #14161f;
+  font-size: 1.25em; font-weight: 700; font-family: inherit;
+  line-height: 1; cursor: pointer;
+}
+.sign-toggle.neg { background: #fdeaea; border-color: #e3b4b4; color: #c0392b; }
+.sign-toggle:active { transform: scale(0.95); }
+
+/* Long labels leave too little room beside the input on a phone, so those rows
+   put the label on its own line and give the field the full width. */
+.field-row.stacked { flex-direction: column; align-items: stretch; gap: 0.35em; }
+.field-row.stacked .field-label { width: auto; }

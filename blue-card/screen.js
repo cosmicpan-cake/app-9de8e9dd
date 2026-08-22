@@ -10,7 +10,7 @@ window.SCREEN = {
     { id: "adet",    label: "Toplam Adet",  def: 12501 },
     { id: "fiyat",   label: "Anlık Fiyat",  def: 179.40 },
     { id: "maliyet", label: "Ort. Maliyet", def: 168.83 },
-    { id: "degisim", label: "Değişim %",    def: 3.99 }
+    { id: "degisim", label: "Değişim %",    def: 3.99, signed: true }
   ],
 
   seed: { deger: 2241587.40, kz: 130586.15 },

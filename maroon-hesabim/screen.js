@@ -9,7 +9,7 @@ window.SCREEN = {
     { id: "saat", label: "Saat", def: "15:48", raw: true },
     { id: "adet",    label: "Adet",      def: 68400 },
     { id: "fiyat",   label: "Fiyat",     def: 178.90 },
-    { id: "degisim", label: "Gün Değ. %", def: 2.74 }
+    { id: "degisim", label: "Gün Değ. %", def: 2.74, signed: true }
   ],
 
   seed: { toplam: 12312961.00 },

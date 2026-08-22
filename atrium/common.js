@@ -103,15 +103,24 @@
     wrap.innerHTML = "";
     C.fields.forEach(function (f) {
       var row = document.createElement("div");
-      row.className = "field-row";
+      // A field that can go negative stacks, so the sign button and the input
+      // both get room, and carries the button itself.
+      row.className = "field-row" + (f.signed ? " stacked" : "");
+      var input = '<input class="field-input" type="text" inputmode="decimal" id="in_' + f.id + '">';
       row.innerHTML =
         '<span class="field-label">' + f.label + "</span>" +
-        '<input class="field-input" type="text" inputmode="decimal" id="in_' + f.id + '">';
+        (f.signed
+          ? '<div class="input-group">' +
+              '<button type="button" class="sign-toggle" data-for="in_' + f.id + '" aria-label="Artı / eksi">+</button>' +
+              input +
+            "</div>"
+          : input);
       wrap.appendChild(row);
     });
   }
 
   function fillForm() {
+    if (window.SIGN_FIELDS) setTimeout(window.SIGN_FIELDS, 0);
     C.fields.forEach(function (f) {
       var v = state[f.id];
       document.getElementById("in_" + f.id).value =

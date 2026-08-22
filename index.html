@@ -135,15 +135,29 @@
     </div>
     <div class="settings-body">
       <div class="settings-card">
-        <div class="field-row">
+        <div class="field-row stacked">
           <span class="field-label">IEYHO Son Fiyat</span>
           <input class="field-input" type="text" inputmode="decimal" id="inPrice" placeholder="179,60">
         </div>
-        <div class="field-row">
+        <div class="field-row stacked">
           <span class="field-label">IEYHO Değişim %</span>
-          <input class="field-input" type="text" inputmode="decimal" id="inChange" placeholder="4,12">
+          <div class="input-group">
+            <button type="button" class="sign-toggle" data-for="inChange" aria-label="Artı / eksi">+</button>
+            <input class="field-input" type="text" inputmode="decimal" id="inChange" placeholder="4,12">
+          </div>
         </div>
-        <p class="field-hint">Hissenin günlük fiyat değişimi %'si</p>
+        <p class="field-hint">Hissenin günlük fiyat değişimi %'si. Düşüş için soldaki
+          <b>&minus;</b> düğmesine dokunun.</p>
+        <div class="live-row">
+          <span class="live-status" id="liveStatus">Canlı veri kapalı</span>
+          <button type="button" class="btn-live" id="btnLive">Canlı veriyi al</button>
+        </div>
+        <div class="field-row stacked">
+          <span class="field-label">Twelve Data API anahtarı</span>
+          <input class="field-input" type="text" id="inApiKey" placeholder="twelvedata.com&apos;dan ücretsiz">
+        </div>
+        <p class="field-hint">Borsa İstanbul fiyatını otomatik almak için gerekir.
+          Anahtar yalnızca bu telefonda saklanır.</p>
         <p class="field-note" id="priceNote"></p>
       </div>
     </div>
@@ -161,6 +175,7 @@
 </div>
 
 <script src="parse-number.js"></script>
+<script src="quote.js"></script>
 <script src="keyboard.js"></script>
 <script src="global-price.js"></script>
 <script src="app.js"></script>

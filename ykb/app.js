@@ -100,6 +100,7 @@
   function renderEditForm() {
     document.getElementById("inFiyat").value = toCommaStr(stock.fiyat);
     document.getElementById("inDegisim").value = toCommaStr(stock.degisim);
+    if (window.SIGN_FIELDS) window.SIGN_FIELDS();
     document.getElementById("inAdet").value = toCommaStr(stock.adet);
     document.getElementById("inMaliyet").value = toCommaStr(stock.ortMaliyet);
   }
