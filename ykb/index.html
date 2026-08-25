@@ -10,6 +10,7 @@
 
 <div class="phone" id="phone">
   <img src="background.png" alt="" class="bg">
+  <div class="statustime" id="clockValue">18:14</div>
 
   <!-- DYNAMIC OVERLAYS (everything else is baked into background.png) -->
   <div class="price-row">
@@ -26,9 +27,9 @@
 
   <div class="gain-line" id="gainLine">+745.800,00 TL &middot; %6,72</div>
 
-  <div class="row-value" id="row1Value" style="top:610px;">66.000</div>
-  <div class="row-value" id="row2Value" style="top:715px;">66.000</div>
-  <div class="row-value" id="row3Value" style="top:821px; right:74px;">168,000000 TL</div>
+  <div class="row-value" id="row1Value" style="top:715px;">66.000</div>
+  <div class="row-value" id="row2Value" style="top:820px;">66.000</div>
+  <div class="row-value" id="row3Value" style="top:926px; right:74px;">168,000000 TL</div>
 
   <!-- Invisible overlays on the static background image: left arrow = edit trigger, right info icon = back to frontpage -->
   <button class="icon-btn edit-trigger" id="btnEdit" aria-label="D&uuml;zenle"></button>
@@ -45,6 +46,10 @@
     </div>
     <div class="edit-scroll">
       <div class="edit-group">
+        <div class="field-row">
+          <span class="field-label">Saat</span>
+          <input class="field-input" type="text" id="inSaat">
+        </div>
         <div class="field-row">
           <span class="field-label">Fiyat (TL)</span>
           <input class="field-input" type="text" inputmode="decimal" id="inFiyat">

@@ -42,7 +42,7 @@ body {
 .phone {
   position: relative;
   width: 945px;
-  height: 990px;
+  height: 2048px;
   background: #f3f2f7;
   overflow: hidden;
   flex-shrink: 0;
@@ -55,13 +55,13 @@ body {
 }
 
 .bg {
-  position: absolute; left: 0; top: 0; width: 945px; height: 990px;
+  position: absolute; left: 0; top: 0; width: 945px; height: 2048px;
   display: block; pointer-events: none;
 }
 
 /* ---------------- DYNAMIC OVERLAYS ---------------- */
 .price-row {
-  position: absolute; left: 186px; top: 220px; height: 40px;
+  position: absolute; left: 186px; top: 325px; height: 40px;
   display: flex; align-items: center; gap: 14px;
 }
 
@@ -78,12 +78,12 @@ body {
 .neg-color { color: #e5484d; }
 
 .guncel-deger-value {
-  position: absolute; left: 64px; top: 446px; width: 500px;
+  position: absolute; left: 64px; top: 551px; width: 500px;
   font-size: 33px; font-weight: 800; color: #232323;
 }
 
 .gain-line {
-  position: absolute; left: 61px; top: 508px; width: 500px;
+  position: absolute; left: 61px; top: 613px; width: 500px;
   font-size: 29px; font-weight: 700;
 }
 
@@ -94,13 +94,18 @@ body {
 
 /* ---------------- EDIT TRIGGER (invisible, over info icon) ---------------- */
 .icon-btn { position: absolute; background: none; border: none; cursor: pointer; padding: 0; }
-.edit-trigger { left: 862px; top: 25px; width: 55px; height: 55px; background: transparent; }
-.home-trigger { left: 20px; top: 20px; width: 100px; height: 75px; background: transparent; }
+.statustime {
+  position: absolute; left: 126px; top: 50px; height: 30px;
+  display: flex; align-items: center; white-space: nowrap; line-height: 1;
+  color: #ffffff; font-size: 41px; font-weight: 600; letter-spacing: 0.3px;
+}
+.edit-trigger { left: 862px; top: 130px; width: 55px; height: 55px; background: transparent; }
+.home-trigger { left: 20px; top: 125px; width: 100px; height: 75px; background: transparent; }
 
 /* ---------------- EDIT SCREEN ---------------- */
 .edit-overlay {
   font-size: 20px;
-  position: absolute; left: 0; top: 0; width: 945px; height: 990px;
+  position: absolute; left: 0; top: 0; width: 945px; height: 2048px;
   background: #f3f2f7; z-index: 50; display: flex; flex-direction: column;
 }
 .edit-overlay.hidden { display: none; }

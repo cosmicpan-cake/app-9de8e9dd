@@ -4,6 +4,7 @@
   var STORAGE_KEY = "ieyhoDemoStock_v1";
 
   var DEFAULT_STOCK = {
+    saat: "18:14",
     adet: 66000,
     fiyat: 179.3,
     degisim: 0.56,
@@ -88,6 +89,7 @@
     document.getElementById("row1Value").textContent = fmtInt(stock.adet);
     document.getElementById("row2Value").textContent = fmtInt(stock.adet); // Satılabilir Adet mirrors Güncel Adet
     document.getElementById("row3Value").textContent = fmtTL(stock.ortMaliyet, 6) + " TL";
+    document.getElementById("clockValue").textContent = stock.saat || DEFAULT_STOCK.saat;
   }
 
   function toCommaStr(value) {
@@ -98,6 +100,7 @@
   function fromCommaStr(str) { return window.parseTypedNumber(str); }
 
   function renderEditForm() {
+    document.getElementById("inSaat").value = stock.saat || DEFAULT_STOCK.saat;
     document.getElementById("inFiyat").value = toCommaStr(stock.fiyat);
     document.getElementById("inDegisim").value = toCommaStr(stock.degisim);
     if (window.SIGN_FIELDS) window.SIGN_FIELDS();
@@ -106,6 +109,7 @@
   }
 
   function collectEditForm() {
+    stock.saat = String(document.getElementById("inSaat").value).trim();
     stock.fiyat = fromCommaStr(document.getElementById("inFiyat").value);
     stock.degisim = fromCommaStr(document.getElementById("inDegisim").value);
     stock.adet = fromCommaStr(document.getElementById("inAdet").value);
@@ -132,7 +136,7 @@
   });
 
   // Scale the fixed 945x990 design canvas to fill whatever the real screen is.
-  var DESIGN_W = 945, DESIGN_H = 990;
+  var DESIGN_W = 945, DESIGN_H = 2048;
   function fitPhoneToViewport() {
     var vw = window.VIEWPORT.width();
     var vh = window.VIEWPORT.height();
