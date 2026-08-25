@@ -84,13 +84,33 @@ body {
 }
 
 .subtitle {
-  position: absolute; left: 36px; top: 267px; width: 500px;
+  position: absolute; left: 36px; top: 985px; width: 500px;
   font-size: 29px; font-weight: 400; color: #5a5c68;
 }
 
+/* ---------------- ACCOUNT SECTION ---------------- */
+/* Cropped from the source and scaled to the canvas width; only the figures on
+   the right of the "Hisse Senedi Varlığım" card are drawn over it. */
+.account-section {
+  position: absolute; left: 0; top: 240px; width: 943px; height: 702px;
+  display: block;
+}
+.sec-value {
+  position: absolute; display: flex; align-items: center; justify-content: flex-end;
+  white-space: nowrap; line-height: 1;
+  font-weight: 500; color: #23242b;
+}
+#secVarlik { right: 61px; top: 462px; height: 33px; font-size: 33px; font-weight: 600; }
+#secBakiye { right: 61px; top: 526px; height: 28px; font-size: 29px; color: #505057; }
+#secKz     { right: 61px; top: 576px; height: 27px; font-size: 29px; }
+#secKzPct  { right: 69px; top: 619px; height: 26px; font-size: 29px; gap: 19px; }
+#secKzPct svg { width: 17px; height: 17px; }
+.sec-value.pos { color: #2a8455; }
+.sec-value.neg { color: #d0021b; }
+
 /* ---------------- CARD GROUP ---------------- */
 .card-group {
-  position: absolute; left: 35px; top: 321px; width: 872px;
+  position: absolute; left: 35px; top: 1039px; width: 872px;
   background: #ffffff; border-radius: 20px;
   border: 1px solid #ececf1;
   box-shadow: 0 2px 10px rgba(20,22,31,0.05);

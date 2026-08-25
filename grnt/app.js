@@ -9,8 +9,8 @@
   // is positioned (see .card-group top in style.css), so block offsets must
   // be relative to that, not the raw canvas coordinate. Visible cards are stacked
   // using CARD_STEP so hiding a stock compacts the list (no gaps).
-  var CARD_GROUP_TOP = 321;
-  var FIRST_ICON_TOP = 346;
+  var CARD_GROUP_TOP = 1039;
+  var FIRST_ICON_TOP = 1064;
   var CARD_STEP = 551;     // vertical spacing between consecutive card icon-tops
   var ROW1_OFFSET = 113;   // icon-top -> row1 top
   var ROW_PITCH = 51;      // row-to-row
@@ -147,11 +147,56 @@
     });
   }
 
+
+  // The account section totals whatever is on screen, so hiding a holding
+  // changes them. Kullanılabilir Bakiye is cash, not derived from the stocks,
+  // so it stays an editable figure of its own.
+  /* Kullanılabilir Bakiye is cash, not something the holdings imply, so it is
+     drawn fresh on each visit rather than totalled or stored — repeated
+     screenshots then never carry an identical balance. */
+  var BAKIYE_MIN = 55000, BAKIYE_MAX = 137000;
+  var bakiye = Math.round((BAKIYE_MIN + Math.random() * (BAKIYE_MAX - BAKIYE_MIN)) * 100) / 100;
+
+  function renderAccountSection(visibleStocks) {
+    var varlik = 0, kz = 0, maliyet = 0;
+    visibleStocks.forEach(function (s) {
+      var d = computeDerived(s);
+      varlik += d.kullanilabilirTutar;
+      kz += d.karZarar;
+      maliyet += s.adet * s.ortMaliyet;
+    });
+    var pct = maliyet !== 0 ? (kz / maliyet) * 100 : 0;
+    var pos = kz >= 0;
+
+    document.getElementById("secVarlik").textContent = fmtTL(varlik, 2) + " TL";
+    document.getElementById("secBakiye").textContent = fmtTL(bakiye, 2) + " TL";
+
+    var kzEl = document.getElementById("secKz");
+    kzEl.textContent = (pos ? "" : "-") + fmtTL(Math.abs(kz), 2) + " TL";
+    kzEl.className = "sec-value " + (pos ? "pos" : "neg");
+
+    var pctEl = document.getElementById("secKzPct");
+    pctEl.innerHTML = fmtSignedPct(pct) + (pos ? arrowUp : arrowDown);
+    pctEl.className = "sec-value " + (pos ? "pos" : "neg");
+  }
+
+  /* The section leaves less height for the list, so only the holdings that fit
+     above the bottom bar are drawn — the bar itself never moves. */
+  var NAV_TOP = 1850;
+  var CARD_HEIGHT = 430;   // icon top -> below the Al/Sat buttons
+  function cardsThatFit(count) {
+    var room = NAV_TOP - FIRST_ICON_TOP;
+    var fits = Math.floor((room + (CARD_STEP - CARD_HEIGHT)) / CARD_STEP);
+    return Math.max(1, Math.min(count, fits));
+  }
+
   function renderPortfolio() {
     var group = document.getElementById("cardGroup");
     group.innerHTML = "";
 
     var visibleStocks = stocks.filter(function (s) { return s.visible !== false; });
+    renderAccountSection(visibleStocks);
+    visibleStocks = visibleStocks.slice(0, cardsThatFit(visibleStocks.length));
 
     visibleStocks.forEach(function (s, i) {
       var d = computeDerived(s);
@@ -235,6 +280,7 @@
         '<span class="checkbox-label">Gerçek saat</span>' +
       '</div>';
     container.appendChild(timeGroup);
+
 
     var uncheckRealTime = function () {
       document.getElementById("realTimeCheckbox").checked = false;
