@@ -22,7 +22,7 @@ SCREENS = [
     ("orange-portfoyum", u"Portföyüm (Turuncu)"),
     ("navy-tab", u"Portföyüm (Lacivert)"),
     ("mobil-borsa", u"Mobil Borsa"),
-    ("maroon-hesabim", u"Hesabım"),
+    ("maroon-hesabim", u"QNB"),
     ("emir-takip", u"Hisse Emir Takip"),
     ("yesil-portfoy", u"Hisse Portföyüm (Yeşil)"),
     ("navy-liste", u"Portföyüm (Liste)"),
