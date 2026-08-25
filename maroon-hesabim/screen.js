@@ -64,9 +64,9 @@ window.SCREEN = {
       get: function (s, A) { return A.num(s.adet, 2); } },
 
     // the two boxes below the Hisse card
-    { id: "viop", right: 158, top: 1682, h: 38, size: 42, weight: 500, color: "#404444",
+    { id: "viop", right: 158, top: 1687, h: 39, size: 42, weight: 500, color: "#404444",
       get: function (s, A) { return A.num(0, 2) + " ₺"; } },
-    { id: "nakit", right: 158, top: 1875, h: 38, size: 42, weight: 500, color: "#414444",
+    { id: "nakit", right: 158, top: 1882, h: 39, size: 42, weight: 500, color: "#414444",
       get: function (s, A) { return A.num(0, 2) + " ₺"; } }
   ]
 };
