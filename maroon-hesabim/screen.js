@@ -1,7 +1,3 @@
-/* Nakit is cash rather than anything the holding implies, so it is drawn fresh
-   on each visit — repeated screenshots never carry an identical balance. */
-var NAKIT = Math.round((125 + Math.random() * (35789 - 125)) * 100) / 100;
-
 window.SCREEN = {
   slug: "maroon-hesabim",
   canvas: [1161, 2427],   // extended to the example's full page
@@ -68,9 +64,9 @@ window.SCREEN = {
       get: function (s, A) { return A.num(s.adet, 2); } },
 
     // the two boxes below the Hisse card
-    { id: "viop", right: 165, top: 1681, h: 38, size: 42, weight: 500, color: "#404444",
+    { id: "viop", right: 158, top: 1682, h: 38, size: 42, weight: 500, color: "#404444",
       get: function (s, A) { return A.num(0, 2) + " ₺"; } },
-    { id: "nakit", right: 165, top: 1871, h: 38, size: 42, weight: 500, color: "#414444",
-      get: function (s, A) { return A.num(NAKIT, 2) + " ₺"; } }
+    { id: "nakit", right: 158, top: 1875, h: 38, size: 42, weight: 500, color: "#414444",
+      get: function (s, A) { return A.num(0, 2) + " ₺"; } }
   ]
 };
