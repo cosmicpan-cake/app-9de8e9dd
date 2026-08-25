@@ -1,6 +1,6 @@
 window.SCREEN = {
   slug: "red-portfoyum",
-  canvas: [1249, 1514],
+  canvas: [1249, 2715],   // extended with empty white to the example's proportions
   locale: "tr-TR",
 
   fields: [
