@@ -167,12 +167,14 @@ body.editing .phone { transform-origin: top center; }
    right opens settings. Kept under the settings panel so they stop responding
    once it is open. */
 .corner-hit {
-  position: absolute; top: 0; z-index: 40;
+  position: absolute; z-index: 40;
   width: 17%; height: 10%;
   background: transparent; border: 0; padding: 0; cursor: pointer;
 }
-.corner-hit.left { left: 0; }
-.corner-hit.right { right: 0; }
+.corner-hit.left   { left: 0; }
+.corner-hit.right  { right: 0; }
+.corner-hit.top    { top: 0; }
+.corner-hit.bottom { bottom: 0; }
 
 /* The edit screen is moved out of the scaled canvas by shell.js and sized to
    the device instead, so every screen's form is the same comfortable size no

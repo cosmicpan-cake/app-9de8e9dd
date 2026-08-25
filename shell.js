@@ -36,10 +36,30 @@
     if (b) b.click();
   }
 
+  /* Vendor prefixes because Android's older WebViews still want them. */
+  function fullscreenElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
+  }
+
+  function toggleFullscreen() {
+    var el = document.documentElement;
+    if (fullscreenElement()) {
+      var exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (exit) exit.call(document);
+    } else {
+      var enter = el.requestFullscreen || el.webkitRequestFullscreen;
+      // Refused on iOS Safari, which only allows video to go fullscreen; the
+      // tap simply does nothing there rather than throwing.
+      if (enter) { try { enter.call(el); } catch (e) {} }
+    }
+  }
+
   function addCorners() {
     var p = phone();
     if (!p || p.querySelector(".corner-hit")) return;
-    [["left", "Geri", goBack], ["right", "Düzenle", openEdit]].forEach(function (c) {
+    [["top left", "Geri", goBack],
+     ["top right", "Düzenle", openEdit],
+     ["bottom left", "Tam ekran", toggleFullscreen]].forEach(function (c) {
       var b = document.createElement("button");
       b.className = "corner-hit " + c[0];
       b.type = "button";
