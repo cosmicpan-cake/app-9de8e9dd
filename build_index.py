@@ -41,6 +41,7 @@ SCREENS = [
     ("toplu-emir", u"Toplu Emir"),
     ("pdf-rapor", u"PDF Rapor"),
     ("ykb2", u"Hisse Senedi Detay"),
+    ("ziraat", u"Hisse Al/Sat"),
 ]
 
 HEAD = u"""<!DOCTYPE html>
