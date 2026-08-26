@@ -10,7 +10,7 @@ PER_PAGE = 9
 
 SCREENS = [
     ("grnt", u"Garanti"),
-    ("ykb", u"Yapı Kredi"),
+    ("ykb", u"İş Bankası"),
     ("is", u"İş Bankası"),
     ("oyk", u"Oyak Yatırım"),
     ("dark-liste", u"Liste (Koyu)"),
