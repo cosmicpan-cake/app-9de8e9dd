@@ -36,11 +36,18 @@ window.SCREEN = {
     { id: "company", left: 138, top: 202, h: 17, size: 23, weight: 400, color: "#3b3b3b",
       get: function () { return "IŞIKLAR E.Y.H. A.Ş."; } },
 
-    // the quote header: price large, change beside it
+    // The quote header prints the price and the change side by side. They are
+    // one overlay so the change flows after the price and cannot collide with
+    // it — IEYHO's price is far wider than the source's was, and a fixed x for
+    // the change overlapped. Inline flow also baseline-aligns them, which is
+    // how the source sits.
     { id: "hdrFiyat", left: 52, top: 240, h: 31, size: 44, weight: 700, color: "#141416",
-      get: function (s, A) { return A.num(s.fiyat, 3); } },
-    { id: "hdrPct", left: 204, top: 249, h: 19, size: 22, weight: 500,
-      get: function (s, A) { return PCT(s.degisim, A); } },
+      get: function (s, A) {
+        var d = s.degisim == null ? 0 : s.degisim;
+        return { html: A.num(s.fiyat, 3) +
+          '<span style="font-size:0.5em;font-weight:500;margin-left:14px;color:' +
+          (d >= 0 ? POS : NEG) + '">% ' + A.num(d, 1) + "</span>" };
+      } },
 
     // the order form
     { id: "fiyat", left: 52, top: 389, h: 23, size: 27, weight: 600, color: "#0e0e0e",
