@@ -1,0 +1,130 @@
+/* Shared styling for every cloned screen. The page is a fixed-size canvas the
+   size of the source screenshot, scaled to fit whatever viewport it opens in,
+   so the pixel geometry inside is preserved exactly. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  height: 100dvh; width: 100vw;
+}
+
+.phone { position: relative; overflow: hidden; flex-shrink: 0; transform-origin: center center; }
+
+#bg { position: absolute; left: 0; top: 0; display: block; pointer-events: none; }
+
+/* One overlay per dynamic value. Vertically centring the glyphs inside the
+   measured ink band avoids having to compensate for font ascent/descent. */
+.ov {
+  position: absolute;
+  display: flex; align-items: center;
+  white-space: nowrap;
+  line-height: 1;
+}
+.ov .small { font-size: 0.72em; }
+
+/* Invisible hit area placed over an existing icon in the screenshot, so the
+   clone gains an edit affordance without altering its appearance. */
+.hit { position: absolute; background: transparent; border: 0; padding: 0; cursor: pointer; z-index: 20; }
+
+/* ---------------- edit overlay ---------------- */
+.edit-overlay {
+  position: absolute; left: 0; top: 0; z-index: 50;
+  background: #f4f5f7; display: flex; flex-direction: column;
+  font-size: 16px;
+}
+.edit-overlay.hidden { display: none; }
+
+.edit-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6em 1.75em 1em 1.75em;
+}
+.edit-head h2 { font-size: 1.6em; font-weight: 800; color: #14161f; }
+.edit-head button {
+  background: none; border: 0; cursor: pointer; color: #14161f;
+  width: 2.2em; height: 2.2em;
+}
+.edit-head svg { width: 100%; height: 100%; }
+
+.edit-body { flex: 1; overflow-y: auto; padding: 0.25em 1.75em 1.25em 1.75em; }
+
+.edit-card {
+  background: #fff; border: 1px solid #e6e8eb; border-radius: 1em; padding: 1.4em;
+}
+
+.field-row { display: flex; align-items: center; gap: 0.75em; margin-bottom: 1em; }
+.field-row:last-child { margin-bottom: 0; }
+.field-label { width: 44%; flex-shrink: 0; font-size: 1.2em; color: #5a5c68; }
+.field-input {
+  flex: 1; min-width: 0; padding: 0.65em 0.8em; border-radius: 0.6em;
+  border: 1.6px solid #dcdfe3; background: #fafbfc;
+  font-size: 1.35em; color: #14161f; font-family: inherit;
+}
+.field-input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+.save-bar { padding: 0.8em 1.75em 1em 1.75em; background: #f4f5f7; }
+.btn-save {
+  width: 100%; padding: 0.8em 0; border: 0; border-radius: 2em;
+  background: #1f2430; color: #fff; font-weight: 700; font-size: 1.4em;
+  font-family: inherit; cursor: pointer;
+}
+.btn-save:active { background: #39404f; }
+
+/* While a field is focused the canvas keeps its full-height scale, so it no
+   longer fits above the keyboard — anchor it to the top rather than centring
+   it, which would push the fields being typed into off screen. */
+body.editing { align-items: flex-start; }
+/* The canvas keeps its full unscaled layout size, so a top-aligned flex item
+   would still paint from the middle of that box. The origin has to move with
+   the alignment for the top of the screen to land at the top of the viewport. */
+body.editing .phone { transform-origin: top center; }
+
+/* Two invisible corner targets on every screen: top left goes back, top right
+   opens the edit screen. Kept under the edit overlay so they stop responding
+   once it is open. */
+.corner-hit {
+  position: absolute; z-index: 40;
+  width: 17%; height: 10%;
+  background: transparent; border: 0; padding: 0; cursor: pointer;
+}
+.corner-hit.left   { left: 0; }
+.corner-hit.right  { right: 0; }
+.corner-hit.top    { top: 0; }
+.corner-hit.bottom { bottom: 0; }
+
+/* The edit screen is moved out of the scaled canvas by shell.js and sized to
+   the device instead, so every screen's form is the same comfortable size no
+   matter how tall or wide its canvas happens to be. Height is set from the
+   visual viewport, which puts the save button above the keyboard for free. */
+.edit-overlay.sheet, .settings.sheet {
+  position: fixed; left: 0; right: 0; top: 0;
+  width: 100%; max-width: 620px;
+  height: 100%;
+  margin: 0 auto;
+  z-index: 200;
+  font-size: clamp(15px, 4.1vw, 20px);
+  box-shadow: 0 0 60px rgba(0,0,0,0.25);
+}
+
+/* A field that can go negative pairs its input with a sign button, because a
+   phone's decimal keypad offers no minus key. */
+.input-group { flex: 1; min-width: 0; display: flex; gap: 0.5em; align-items: stretch; }
+.input-group .field-input { flex: 1; min-width: 0; }
+.sign-toggle {
+  flex: 0 0 auto; width: 2.8em;
+  border: 1.6px solid #dcdfe3; border-radius: 0.6em;
+  background: #fff; color: #14161f;
+  font-size: 1.25em; font-weight: 700; font-family: inherit;
+  line-height: 1; cursor: pointer;
+}
+.sign-toggle.neg { background: #fdeaea; border-color: #e3b4b4; color: #c0392b; }
+.sign-toggle:active { transform: scale(0.95); }
+
+/* Long labels leave too little room beside the input on a phone, so those rows
+   put the label on its own line and give the field the full width. */
+.field-row.stacked { flex-direction: column; align-items: stretch; gap: 0.35em; }
+.field-row.stacked .field-label { width: auto; }
