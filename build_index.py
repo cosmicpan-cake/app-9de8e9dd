@@ -43,6 +43,7 @@ SCREENS = [
     ("ykb2", u"Hisse Senedi Detay"),
     ("ziraat", u"Hisse Al/Sat"),
     ("etiler", u"Portföyüm (Etiler)"),
+    ("midas", u"IEYHO Pozisyonum"),
 ]
 
 HEAD = u"""<!DOCTYPE html>
