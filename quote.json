@@ -1,8 +1,8 @@
 {
   "symbol": "IEYHO",
-  "fiyat": 214.2,
-  "degisim": 0.8,
+  "fiyat": 214.1,
+  "degisim": 0.75,
   "previousClose": 212.5,
-  "marketTime": 1788520118000,
-  "fetchedAt": 1788521037023
+  "marketTime": 1788520868000,
+  "fetchedAt": 1788521782809
 }
