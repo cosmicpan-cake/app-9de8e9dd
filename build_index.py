@@ -44,6 +44,7 @@ SCREENS = [
     ("ziraat", u"Hisse Al/Sat"),
     ("etiler", u"Portföyüm (Etiler)"),
     ("midas", u"IEYHO Pozisyonum"),
+    ("vakif", u"Hisse Senedi Detay (VakıfBank)"),
 ]
 
 HEAD = u"""<!DOCTYPE html>
