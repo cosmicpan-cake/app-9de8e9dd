@@ -46,6 +46,7 @@ SCREENS = [
     ("midas", u"IEYHO Pozisyonum"),
     ("vakif", u"Hisse Senedi Detay (VakıfBank)"),
     ("grnt2", u"Garanti (KUYAS / RALYH)"),
+    ("dgnmo", u"Garanti (DGNMO / RALYH)"),
 ]
 
 HEAD = u"""<!DOCTYPE html>
